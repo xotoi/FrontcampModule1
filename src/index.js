@@ -5,9 +5,9 @@ import 'bootstrap';
 const service = new newsApiService();
 service.getNewsSources().then(result => {
     for(var i =0; i < 11; i++){
-        const source = result.sources[i];
-        const selectorElement = $(`<button id="${source.id}" class="dropdown-item" type="button">${source.name}</a>`);
-        selectorElement.click(function() {onSelectorClick(source.id, service)});
+        const { id, name } = result.sources[i];
+        const selectorElement = $(`<button id="${id}" class="dropdown-item" type="button">${name}</a>`);
+        selectorElement.click(function() {onSelectorClick(id, service)});
         $('#sourceSelector').append(selectorElement);
     };
 });
