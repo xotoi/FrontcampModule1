@@ -15,7 +15,6 @@ service.getNewsSources().then(result => {
 });
 
 async function onSelectorClick(id, service){
-    import('./clickHandlers/handlers').then((module) => {
-        module.default(id, service)
-    })
+    const handlers = await import('./clickHandlers/handlers');
+    handlers.default(id, service);
 }
