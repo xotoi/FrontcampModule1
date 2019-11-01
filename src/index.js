@@ -1,8 +1,10 @@
 import $ from 'jquery';
-import newsApiService from './services/newsApiService';
+import newsApiServiceFactory from './factories/newsApiServiceFactory';
 import 'bootstrap';
 
-const service = new newsApiService();
+const factory = new newsApiServiceFactory();
+const service = factory.createService('GET');
+
 service.getNewsSources().then(result => {
     let sources = [];
     for(var i =0; i < 11; i++){
@@ -15,6 +17,6 @@ service.getNewsSources().then(result => {
 });
 
 async function onSelectorClick(id, service){
-    const handlers = await import('./clickHandlers/handlers');
+    const handlers = await import('./handlers/sourceSelectHandler');
     handlers.default(id, service);
-}
+};

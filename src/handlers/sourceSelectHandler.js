@@ -20,8 +20,7 @@ export default function sourceSelectHandler(sourceId, service){
                     $('<p>', {
                         'class': 'card-text'
                     }).text(article.content)
-                    )
-                    
+                    )        
                 )
             );
         });
