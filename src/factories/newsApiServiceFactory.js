@@ -1,24 +1,8 @@
-import newsApiService from './../services/newsApiService';
+import tracebleService from './../interceptors/tracebleService';
 
 export default class newsApiServiceFactory {
     createService (httpMethod) {
-        let handler = {
-            get (target) {
-                if (target.verb === 'GET'){
-                    console.log('Correct http verb for this api')
-                    return target;                    
-                } else {
-                    console.log('Incorrect http verv for this api')
-                    return 'GET';
-                }    
-            }
-        }
-
-        let methodObject = { verb: httpMethod };
-
-        let proxiedMethod = new Proxy(methodObject, handler)
-
-        switch (proxiedMethod.verb) {
+        switch (httpMethod) {
             case 'POST':
                 return this.getService('POST');
             case 'PUT':
@@ -31,6 +15,7 @@ export default class newsApiServiceFactory {
     }
 
     getService(httpMethod){
-        return new newsApiService(httpMethod);
+        const tracer = new tracebleService(httpMethod);
+        return tracer.getNewsApiService();
     }
 };
