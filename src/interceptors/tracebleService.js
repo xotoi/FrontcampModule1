@@ -9,13 +9,13 @@ export default class tracebleService {
     traceMethodCalls(service) {
         let handler = {
             get(target, propKey) {
-                    const origMethod = target[propKey];
+                const origMethod = target[propKey];
 
-                    return function (...args) {
-                        let result = origMethod.apply(target, args);
-                        console.log(`${propKey + JSON.stringify(args)} was called`);
-                        return result;
-                    };
+                return function (...args) {
+                    let result = origMethod.apply(target, args);
+                    console.log(`${propKey + JSON.stringify(args)} was called`);
+                    return result;
+                };
             }
         };
         return new Proxy(service, handler);
